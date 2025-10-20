@@ -1,0 +1,101 @@
+<h1 class="mt-5">Szállítmányok</h1>
+
+<!-- Névjegy Modal -->
+<button type="button" class="btn btn-purple" data-bs-toggle="modal" data-bs-target="#nameCardModal">
+  Névjegy
+</button>
+
+<!-- Felvételi Modal -->
+<button type="button" class="btn btn-dark m-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Felvétel
+</button>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Azonosító</th>
+      <th scope="col">Kiküldési ideje</th>
+      <th scope="col">Kézbesítés ideje</th>
+      <th scope="col">Címzett</th>
+      <th scope="col">Cél város</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(shipments of shipments; track shipments.id){
+        <tr>
+            <th scope="row">{{shipments.id}}</th>
+            <td>{{shipments.shipmentId}}</td>
+            <td>{{shipments.sentDate}}</td>
+            <td>{{shipments.endDate}}</td>
+            <td>{{shipments.addressee}}</td>
+            <td>{{shipments.targetCity}}</td>
+        </tr>
+    }    
+  </tbody>
+</table>
+
+
+<!-- Névjegy -->
+<div class="modal fade" id="nameCardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Névjegy</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Készítő: Hanák Renáta</p>
+        <p>Osztály: Szoft 2/N</p>
+        <p>Dátum: 2025-10-20</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Felvétel Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Szállítmány felvétele</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="shipmentForm" (ngSubmit)="add()" id="shipmentForm">
+        <div class="modal-body">        
+              <div>
+                  <label for="shipmentId" class="form-label mt-3" >Azonosító</label>
+                  <input type="text" id="shipmentId" class="form-control" formControlName="shipmentId">
+              </div>
+              <div>
+                  <label for="sentDate" class="form-label mt-3" >Kiküldés ideje</label>
+                  <input type="text" id="sentDate" class="form-control" formControlName="sentDate">
+              </div>
+              <div>
+                  <label for="endDate" class="form-label mt-3" >Kézbesítés ideje</label>
+                  <input type="text" id="endDate" class="form-control" formControlName="endDate">
+              </div>
+              <div>
+                  <label for="addressee" class="form-label mt-3" >Címzett</label>
+                  <input type="text" id="addressee" class="form-control" formControlName="addressee">
+              </div>
+              <div>
+                  <label for="targetCity" class="form-label mt-3" >Cél város</label>
+                  <input type="text" id="targetCity" class="form-control" formControlName="targetCity">
+              </div>      
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Bezár</button>
+        <button type="submit" class="btn btn-dark"  form="shipmentForm" data-bs-dismiss="modal">Ment</button>
+      </div>
+      </form>      
+    </div>
+  </div>
+</div>
+
